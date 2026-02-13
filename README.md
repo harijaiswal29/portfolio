@@ -205,7 +205,7 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 
 ## 👤 Author
 
-**Your Name**
+**Hari Jaiswal**
 
 - GitHub: [@harijaiswal29](https://github.com/harijaiswal29)
 - Portfolio: [https://harijaiswal29.github.io/portfolio/](https://harijaiswal29.github.io/portfolio/)

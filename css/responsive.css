@@ -21,13 +21,9 @@
         gap: var(--spacing-md);
     }
 
-    .about-image .image-placeholder {
+    .about-image img {
         width: 250px;
         height: 250px;
-    }
-
-    .about-image .image-placeholder i {
-        font-size: 6rem;
     }
 
     /* Projects Grid */
@@ -69,7 +65,7 @@
         left: -100%;
         top: 70px;
         flex-direction: column;
-        background-color: rgba(255, 255, 255, 0.98);
+        background-color: var(--header-bg);
         width: 100%;
         text-align: center;
         transition: 0.3s;
@@ -100,6 +96,13 @@
 
     .hamburger.active .bar:nth-child(3) {
         transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Theme toggle positioning */
+    .theme-toggle {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
     }
 
     /* Hero Section */
@@ -148,13 +151,9 @@
     }
 
     /* About Section */
-    .about-image .image-placeholder {
+    .about-image img {
         width: 200px;
         height: 200px;
-    }
-
-    .about-image .image-placeholder i {
-        font-size: 5rem;
     }
 
     .about-text h3 {
@@ -305,13 +304,9 @@
         font-size: 0.9375rem;
     }
 
-    .about-image .image-placeholder {
+    .about-image img {
         width: 180px;
         height: 180px;
-    }
-
-    .about-image .image-placeholder i {
-        font-size: 4rem;
     }
 
     .project-image .image-placeholder {
@@ -346,7 +341,8 @@
     .scroll-down,
     .scroll-top,
     .hero-buttons,
-    .contact-form {
+    .contact-form,
+    .theme-toggle {
         display: none;
     }
 

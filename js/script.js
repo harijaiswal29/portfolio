@@ -3,18 +3,35 @@ const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('navMenu');
 const navLinks = document.querySelectorAll('.nav-link');
 
-// Toggle mobile menu
-hamburger.addEventListener('click', () => {
+function toggleMenu() {
     hamburger.classList.toggle('active');
     navMenu.classList.toggle('active');
+    const isOpen = navMenu.classList.contains('active');
+    hamburger.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+}
+
+function closeMenu() {
+    hamburger.classList.remove('active');
+    navMenu.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = 'auto';
+}
+
+// Toggle mobile menu
+hamburger.addEventListener('click', toggleMenu);
+
+// Keyboard support for hamburger
+hamburger.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleMenu();
+    }
 });
 
 // Close mobile menu when clicking on a link
 navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
-    });
+    link.addEventListener('click', closeMenu);
 });
 
 // ========== Smooth Scrolling ==========
@@ -80,35 +97,69 @@ scrollTopBtn.addEventListener('click', () => {
     });
 });
 
-// ========== Contact Form Validation ==========
+// ========== Contact Form (Formspree) ==========
 const contactForm = document.getElementById('contactForm');
+const submitBtn = document.getElementById('submitBtn');
+const formStatus = document.getElementById('formStatus');
 
-contactForm.addEventListener('submit', (e) => {
+function showFormStatus(type, message) {
+    formStatus.textContent = message;
+    formStatus.className = 'form-status ' + type;
+    setTimeout(() => {
+        formStatus.textContent = '';
+        formStatus.className = 'form-status';
+    }, 5000);
+}
+
+contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Get form values
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
     const message = document.getElementById('message').value.trim();
 
-    // Basic validation
     if (name === '' || email === '' || message === '') {
-        alert('Please fill in all fields');
+        showFormStatus('error', 'Please fill in all fields.');
         return;
     }
 
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-        alert('Please enter a valid email address');
+        showFormStatus('error', 'Please enter a valid email address.');
         return;
     }
 
-    // Success message (since there's no backend)
-    alert('Thank you for your message! This is a demo form. To make it functional, integrate with a backend service like FormSpree or EmailJS.');
+    // Check if Formspree ID is configured
+    const formAction = contactForm.getAttribute('action');
+    if (formAction.includes('YOUR_FORM_ID')) {
+        showFormStatus('error', 'Contact form is not yet configured. Please set up a Formspree form ID.');
+        return;
+    }
 
-    // Reset form
-    contactForm.reset();
+    // Submit via fetch
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Sending...';
+    submitBtn.classList.add('loading');
+
+    try {
+        const response = await fetch(formAction, {
+            method: 'POST',
+            body: new FormData(contactForm),
+            headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+            showFormStatus('success', 'Thank you! Your message has been sent.');
+            contactForm.reset();
+        } else {
+            showFormStatus('error', 'Something went wrong. Please try again.');
+        }
+    } catch (error) {
+        showFormStatus('error', 'Network error. Please check your connection and try again.');
+    } finally {
+        submitBtn.textContent = originalText;
+        submitBtn.classList.remove('loading');
+    }
 });
 
 // ========== Navbar Background on Scroll ==========
@@ -116,10 +167,10 @@ const header = document.getElementById('header');
 
 window.addEventListener('scroll', () => {
     if (window.pageYOffset > 50) {
-        header.style.backgroundColor = 'rgba(255, 255, 255, 1)';
+        header.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--header-bg-scroll').trim();
         header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
     } else {
-        header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+        header.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--header-bg').trim();
     }
 });
 
@@ -144,7 +195,7 @@ if (scrollDownBtn) {
     });
 }
 
-// ========== Animation on Scroll (Optional) ==========
+// ========== Animation on Scroll ==========
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -171,28 +222,48 @@ animateElements.forEach(el => {
 // ========== Close mobile menu when clicking outside ==========
 document.addEventListener('click', (e) => {
     if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
+        closeMenu();
     }
 });
 
-// ========== Prevent scroll when mobile menu is open ==========
-const body = document.body;
+// ========== Dark Mode Toggle ==========
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = themeToggle.querySelector('i');
 
-hamburger.addEventListener('click', () => {
-    if (navMenu.classList.contains('active')) {
-        body.style.overflow = 'hidden';
+function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    if (theme === 'dark') {
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
     } else {
-        body.style.overflow = 'auto';
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
     }
+}
+
+// Initialize theme from localStorage or system preference
+(function initTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        setTheme(savedTheme);
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        setTheme('dark');
+    }
+})();
+
+themeToggle.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    setTheme(current === 'dark' ? 'light' : 'dark');
 });
 
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        body.style.overflow = 'auto';
-    });
+// Listen for system theme changes
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+        setTheme(e.matches ? 'dark' : 'light');
+    }
 });
 
 // ========== Console Welcome Message ==========
-console.log('%c👋 Welcome to my portfolio!', 'color: #2563eb; font-size: 20px; font-weight: bold;');
+console.log('%c Welcome to my portfolio!', 'color: #2563eb; font-size: 20px; font-weight: bold;');
 console.log('%cInterested in the code? Check out the repository on GitHub!', 'color: #6b7280; font-size: 14px;');
