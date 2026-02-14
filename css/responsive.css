@@ -245,14 +245,6 @@
         margin-top: var(--spacing-sm);
     }
 
-    .contact-form {
-        padding: var(--spacing-sm);
-    }
-
-    .form-group {
-        margin-bottom: var(--spacing-sm);
-    }
-
     /* Footer */
     .footer-content {
         flex-direction: column;
@@ -341,7 +333,6 @@
     .scroll-down,
     .scroll-top,
     .hero-buttons,
-    .contact-form,
     .theme-toggle {
         display: none;
     }
