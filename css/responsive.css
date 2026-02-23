@@ -230,7 +230,7 @@
     }
 
     .social-links {
-        justify-content: center;
+        justify-content: flex-start;
         margin-top: var(--spacing-sm);
     }
 

@@ -548,12 +548,12 @@ section {
 /* ========== Contact Section ========== */
 .contact-content {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .contact-info {
     max-width: 600px;
-    text-align: center;
+    text-align: left;
 }
 
 .contact-info h3 {
@@ -609,7 +609,7 @@ section {
 
 .social-links {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: var(--spacing-sm);
 }
 
