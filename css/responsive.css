@@ -36,9 +36,39 @@
         grid-template-columns: repeat(2, 1fr);
     }
 
+    /* Navigation gap for 6 links */
+    .nav-menu {
+        gap: 1.25rem;
+    }
+
     /* Section Title */
     .section-title {
         font-size: 2rem;
+    }
+
+    /* Timeline */
+    .timeline::before {
+        left: 2rem;
+    }
+
+    .timeline-item,
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+        width: 100%;
+        left: 0;
+        padding-left: 4rem;
+        padding-right: 0;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-marker,
+    .timeline-item:nth-child(even) .timeline-marker {
+        left: calc(2rem - 8px);
+        right: auto;
+    }
+
+    /* Certifications Grid */
+    .certs-container {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     /* Spacing */
@@ -209,6 +239,35 @@
         padding: 0.75rem;
     }
 
+    /* Certifications Grid */
+    .certs-container {
+        grid-template-columns: 1fr;
+    }
+
+    /* Timeline compact */
+    .timeline::before {
+        left: 1.5rem;
+    }
+
+    .timeline-item,
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+        padding-left: 3.5rem;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-marker,
+    .timeline-item:nth-child(even) .timeline-marker {
+        left: calc(1.5rem - 8px);
+    }
+
+    .timeline-content {
+        padding: var(--spacing-sm);
+    }
+
+    .timeline-content h3 {
+        font-size: 1.1rem;
+    }
+
     .contact-info h3 {
         font-size: 1.5rem;
     }
@@ -290,6 +349,15 @@
         height: 180px;
     }
 
+    .timeline-content h3 {
+        font-size: 1rem;
+    }
+
+    .timeline-content .timeline-company,
+    .timeline-content .timeline-date {
+        font-size: 0.8125rem;
+    }
+
     .project-image .image-placeholder {
         height: 180px;
     }
@@ -337,7 +405,9 @@
     }
 
     .project-card,
-    .skill-category {
+    .skill-category,
+    .timeline-item,
+    .cert-category {
         page-break-inside: avoid;
     }
 }

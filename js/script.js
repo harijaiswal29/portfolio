@@ -146,7 +146,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe project cards and skill categories for animation
-const animateElements = document.querySelectorAll('.project-card, .skill-category');
+const animateElements = document.querySelectorAll('.project-card, .skill-category, .timeline-item, .cert-category');
 animateElements.forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';

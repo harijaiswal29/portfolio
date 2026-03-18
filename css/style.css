@@ -482,9 +482,19 @@ section {
     color: var(--accent-color);
 }
 
+/* ========== Project Impact ========== */
+.project-impact {
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    border-left: 3px solid var(--primary-color);
+    padding-left: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
 /* ========== Skills Section ========== */
 .skills {
-    background-color: var(--bg-secondary);
+    background-color: var(--bg-color);
 }
 
 .skills-container {
@@ -691,6 +701,147 @@ section {
 
 .scroll-top.show {
     display: flex;
+}
+
+/* ========== Experience / Timeline Section ========== */
+.experience {
+    background-color: var(--bg-color);
+}
+
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--spacing-md) 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 100%;
+    background-color: var(--primary-color);
+    top: 0;
+}
+
+.timeline-item {
+    position: relative;
+    padding: 0 0 var(--spacing-md) 0;
+    width: 50%;
+}
+
+.timeline-item:nth-child(odd) {
+    left: 0;
+    padding-right: var(--spacing-lg);
+}
+
+.timeline-item:nth-child(even) {
+    left: 50%;
+    padding-left: var(--spacing-lg);
+}
+
+.timeline-marker {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    top: 0.5rem;
+    z-index: 1;
+    border: 3px solid var(--bg-color);
+}
+
+.timeline-item:nth-child(odd) .timeline-marker {
+    right: -8px;
+}
+
+.timeline-item:nth-child(even) .timeline-marker {
+    left: -8px;
+}
+
+.timeline-content {
+    background-color: var(--card-bg);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.timeline-content h3 {
+    font-size: 1.25rem;
+    color: var(--text-color);
+    margin-bottom: 0.25rem;
+}
+
+.timeline-content .timeline-company {
+    font-size: 1rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.timeline-content .timeline-date {
+    font-size: 0.875rem;
+    color: var(--text-light);
+    margin-bottom: var(--spacing-sm);
+}
+
+.timeline-content p:last-child {
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+/* ========== Projects Section Background ========== */
+.projects {
+    background-color: var(--bg-secondary);
+}
+
+/* ========== Certifications Section ========== */
+.certifications {
+    background-color: var(--bg-secondary);
+}
+
+.certs-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+}
+
+.cert-category {
+    background-color: var(--card-bg);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.cert-category h3 {
+    font-size: 1.25rem;
+    color: var(--text-color);
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.cert-category h3 i {
+    color: var(--primary-color);
+}
+
+.cert-list {
+    list-style: none;
+}
+
+.cert-list li {
+    padding: var(--spacing-xs) 0;
+    color: var(--text-light);
+    border-bottom: 1px solid var(--border-color);
+    line-height: 1.6;
+}
+
+.cert-list li:last-child {
+    border-bottom: none;
 }
 
 /* ========== Animations ========== */
