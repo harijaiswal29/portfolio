@@ -1,221 +1,103 @@
-# Portfolio Website
+# Hari Jaiswal — Portfolio
 
-A modern, responsive portfolio website built with HTML5, CSS3, and JavaScript. Deployed on GitHub Pages.
+Personal portfolio website for **Hari Jaiswal**, AI Transformation & AI/ML Engineering Leader. A fast, responsive single-page site built with plain HTML5, CSS3, and vanilla JavaScript — no build system, bundler, or framework. Deployed on GitHub Pages.
 
 ## 🌐 Live Demo
 
-Visit the live site: [https://harijaiswal29.github.io/portfolio/](https://harijaiswal29.github.io/portfolio/)
+[https://harijaiswal29.github.io/portfolio/](https://harijaiswal29.github.io/portfolio/)
 
 ## ✨ Features
 
-- **Responsive Design**: Fully responsive layout that works on desktop, tablet, and mobile devices
-- **Modern UI**: Clean and professional design with smooth animations and transitions
-- **Single Page Application**: All sections on one scrollable page for easy navigation
-- **Interactive Elements**:
-  - Smooth scrolling navigation
-  - Mobile hamburger menu
-  - Active section highlighting
-  - Scroll-to-top button
-  - Form validation
-  - Hover effects and animations
+- **Responsive design** — works across desktop, tablet, and mobile
+- **Dark mode** — toggle persisted in `localStorage`, with system-preference fallback
+- **Single-page layout** — smooth-scroll navigation with active-section highlighting
+- **Scroll interactions** — navbar background on scroll, scroll-to-top button, scroll-down arrow, and IntersectionObserver-based reveal animations
+- **Accessible navigation** — keyboard-operable mobile hamburger menu
+- **SEO-ready** — meta tags, Open Graph/Twitter cards, JSON-LD structured data, `sitemap.xml`, and `robots.txt`
+- **Optimized images** — WebP with `<picture>` fallback to JPG
 
 ## 📁 Project Structure
 
 ```
 portfolio/
-├── index.html              # Main HTML file
+├── index.html             # Single-page app: all sections + SEO/structured data
 ├── css/
-│   ├── style.css          # Desktop and base styles
-│   └── responsive.css     # Mobile and tablet responsive styles
+│   ├── style.css          # Base styles + :root theme variables + dark mode
+│   └── responsive.css     # Responsive breakpoints
 ├── js/
-│   └── script.js          # JavaScript functionality
-├── images/                # Image assets folder
-└── README.md              # Project documentation
+│   └── script.js          # All interactivity (menu, scroll, dark mode, animations)
+├── images/                # Profile photo (WebP + JPG)
+├── resume/                # HariJaiswal_Resume.pdf (download button)
+├── misc/                  # Supporting PDFs (not linked from the live site)
+├── robots.txt             # SEO
+├── sitemap.xml            # SEO
+└── README.md
 ```
 
 ## 🎨 Sections
 
-1. **Header/Navigation**: Sticky navbar with smooth scroll links
-2. **Hero Section**: Eye-catching introduction with CTA buttons
-3. **About**: Personal introduction and background
-4. **Projects**: Showcase of featured projects with descriptions
-5. **Skills**: Display of technical skills and technologies
-6. **Contact**: Contact form and social links
-7. **Footer**: Copyright and social media links
+1. **Hero** — introduction and call-to-action buttons
+2. **About** — background and positioning
+3. **Experience** — roles and highlights
+4. **Projects** — featured project cards
+5. **Skills** — technical and transformation skill groups
+6. **Contact** — direct `mailto:` and social links (no form/backend)
 
-## 🛠️ Technologies Used
+## 🛠️ Technologies
 
 - HTML5
-- CSS3 (Flexbox, Grid, CSS Variables, Animations)
-- JavaScript (ES6+)
-- Font Awesome Icons
+- CSS3 (Flexbox, Grid, custom properties, animations)
+- Vanilla JavaScript (ES6+)
+- Font Awesome 6.4 (via cdnjs CDN)
 - Git & GitHub Pages
 
-## 🚀 Getting Started
+## 🚀 Local Development
 
-### Prerequisites
+No build or install step is required.
 
-- A modern web browser
-- Git installed on your machine
-- A GitHub account
-
-### Local Development
-
-1. Clone the repository:
 ```bash
 git clone https://github.com/harijaiswal29/portfolio.git
 cd portfolio
+
+# Open directly, or serve locally:
+python3 -m http.server 8000   # then visit http://localhost:8000
 ```
 
-2. Open `index.html` in your browser:
-```bash
-# On Linux/Mac
-open index.html
+Optional Python tooling lives in a git-ignored `.venv` (`pip install -r requirements.txt`).
 
-# On Windows
-start index.html
+## 🎯 Conventions
 
-# Or simply double-click the index.html file
-```
+- Colors, spacing, and radii are CSS custom properties in `:root` (see top of `css/style.css`) — use the variables rather than hardcoded values.
+- Dark mode overrides live in the `[data-theme="dark"]` block; add a dark-mode override whenever you add a color-dependent style.
+- External links use `target="_blank" rel="noopener noreferrer"`.
 
-3. Make your changes and test locally before deploying
+## 🌍 Deployment
 
-## 📝 Customization Guide
-
-### 1. Personal Information
-
-Replace placeholder content in [index.html](index.html):
-
-- **Line 9**: Update `<title>` with your name
-- **Line 23**: Replace "YourName" in the logo
-- **Line 40-47**: Update hero section with your name and tagline
-- **Line 63-90**: Add your bio and contact information
-- **Lines 99-199**: Update project details, descriptions, and links
-- **Lines 208-284**: Customize your skills
-- **Lines 295-350**: Update contact information and social links
-
-### 2. Profile Photo
-
-1. Add your profile photo to the `images/` folder
-2. In [index.html](index.html), replace the placeholder div (around line 63) with:
-```html
-<div class="about-image">
-    <img src="images/your-photo.jpg" alt="Your Name">
-</div>
-```
-
-### 3. Project Images
-
-1. Add project screenshots to the `images/` folder
-2. Replace the placeholder divs in project cards with:
-```html
-<div class="project-image">
-    <img src="images/project1.jpg" alt="Project Name">
-</div>
-```
-
-### 4. Colors and Styling
-
-Customize colors in [css/style.css](css/style.css) by modifying CSS variables (lines 2-20):
-
-```css
-:root {
-    --primary-color: #2563eb;    /* Your primary color */
-    --secondary-color: #1e40af;  /* Your secondary color */
-    --accent-color: #3b82f6;     /* Your accent color */
-    /* ... other variables */
-}
-```
-
-### 5. Contact Form
-
-The contact form currently shows a demo alert. To make it functional:
-
-1. **Option 1 - FormSpree**:
-   - Sign up at [formspree.io](https://formspree.io/)
-   - Replace the form action in index.html:
-   ```html
-   <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-   ```
-
-2. **Option 2 - EmailJS**:
-   - Sign up at [emailjs.com](https://www.emailjs.com/)
-   - Follow their integration guide
-   - Update the JavaScript in script.js
-
-3. **Option 3 - Custom Backend**:
-   - Create your own API endpoint
-   - Update the form submission handler in script.js
-
-## 🌍 Deployment to GitHub Pages
-
-The portfolio is configured to deploy via the `gh-pages` branch.
-
-### Automatic Deployment (Already Set Up)
-
-The repository is already configured for GitHub Pages. Any push to the `gh-pages` branch will automatically update the live site.
-
-### Manual Deployment
-
-If you need to redeploy:
+The site deploys via GitHub Pages from the `gh-pages` branch. To publish changes:
 
 ```bash
-# Make sure all changes are committed to main branch
-git add .
-git commit -m "Update portfolio"
-
-# Push to gh-pages branch
+# commit changes on main first, then:
 git checkout gh-pages
 git merge main
 git push origin gh-pages
-
-# Return to main branch
 git checkout main
 ```
-
-### Verify Deployment
-
-1. Go to your repository on GitHub
-2. Click **Settings** → **Pages**
-3. Ensure source is set to `gh-pages` branch
-4. Visit your live site at: `https://harijaiswal29.github.io/portfolio/`
 
 ## 📱 Responsive Breakpoints
 
 - **Desktop**: 821px and above
-- **Tablet**: 577px - 820px
-- **Mobile**: 576px and below
-- **Extra Small**: 420px and below
-
-## 🎯 Browser Compatibility
-
-Tested and working on:
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/harijaiswal29/portfolio/issues).
+- **Tablet**: 577px – 820px
+- **Mobile**: 421px – 576px
+- **Extra small**: 420px and below
 
 ## 👤 Author
 
 **Hari Jaiswal**
 
 - GitHub: [@harijaiswal29](https://github.com/harijaiswal29)
+- LinkedIn: [harijaiswal](https://www.linkedin.com/in/harijaiswal/)
 - Portfolio: [https://harijaiswal29.github.io/portfolio/](https://harijaiswal29.github.io/portfolio/)
 
 ## 🙏 Acknowledgments
 
 - Font Awesome for icons
-- Inspired by modern portfolio designs
-- Built following the [HoffsTech tutorial](https://hoffstech.com/2023/03/how-to-create-a-github-portfolio/)
-
----
-
-⭐ Star this repo if you find it helpful!
